@@ -31,8 +31,11 @@ saludarV2(nombre2: nil)
 // De lo contrario debe decir "No tengo datos suficientes para realizar la operacion.
 
 func sumarDouble(double1: Double?, double2: Double?) {
-    let suma = double1 != nil && double2 != nil ? String(double1! + double2!) : "No tengo datos suficientes para realizar la operacion."
-    print(suma)
+    guard let double1 = double1, let double2 = double2 else {
+        print("No tengo datos suficientes para realizar la operacion.")
+        return
+    }
+    print(double1 + double2)
 }
 
 sumarDouble(double1: nil, double2: 1.5)
@@ -48,3 +51,24 @@ func sumarDoubleV2(double1: Double?, double2: Double?) {
 
 sumarDoubleV2(double1: nil, double2: 1.5)
 sumarDoubleV2(double1: 1.5, double2:  1.5)
+
+
+func sumarDoubleV3(double1: Double?, double2: Double?) {
+    /*
+     let suma: Double? = nil
+     if let double1, let double2 {
+         suma = double1 + double2
+     }
+     */
+    
+    let suma: Double? = if let double1, let double2 {
+        double1 + double2
+    } else {
+        nil
+    }
+    if let suma {
+        print(suma)
+    } else {
+        print("No tengo datos suficientes para realizar la operacion.")
+    }
+}
